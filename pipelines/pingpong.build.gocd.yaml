@@ -2,7 +2,7 @@ format_version: 10
 pipelines:
   pingpong_build:
     group: RHTWD_build
-    label_template: "${COUNT}-${pingpong_build[:7]}"
+    label_template: '${COUNT}-${pingpong_build[:7]}'
     lock_behavior: unlockWhenFinished
     display_order: -1
     materials:
@@ -30,6 +30,12 @@ pipelines:
                       - 'docker build . -t rahulrakshit/pingpong:latest'
                       - 'docker tag rahulrakshit/pingpong:latest -t rahulrakshit/pingpong:${GO_PIPELINE_LABEL}'
                     run_if: passed
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - '-c'
+                      - 'docker tag rahulrakshit/pingpong:latest -t rahulrakshit/pingpong:${GO_PIPELINE_LABEL}'
+                    run_if: passed
       - docker_push:
           fetch_materials: true
           keep_artifacts: false
@@ -46,5 +52,10 @@ pipelines:
                     arguments:
                       - '-c'
                       - 'docker push rahulrakshit/pingpong:latest'
+                    run_if: passed
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - '-c'
                       - 'docker push rahulrakshit/pingpong:${GO_PIPELINE_LABEL}'
                     run_if: passed
