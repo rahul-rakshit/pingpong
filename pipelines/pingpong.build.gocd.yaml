@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  pingpong:
+  pingpong_build:
     group: RHTWD_build
     label_template: ${COUNT}
     lock_behavior: none
