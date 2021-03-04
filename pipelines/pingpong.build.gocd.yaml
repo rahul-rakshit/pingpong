@@ -5,6 +5,7 @@ pipelines:
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
+    label_template: "${COUNT}-${infra_provisioning[:7]}"
     materials:
       pingpong_build:
         git: https://github.com/rahul-rakshit/pingpong
