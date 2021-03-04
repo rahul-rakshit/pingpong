@@ -27,7 +27,8 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - '-c'
-                      - 'docker build .'
+                      - 'docker build . -t rahulrakshit/pingpong:latest'
+                      - 'docker tag rahulrakshit/pingpong:latest -t rahulrakshit/pingpong:${GO_PIPELINE_LABEL}'
                     run_if: passed
       - docker_push:
           fetch_materials: true
@@ -44,5 +45,6 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - '-c'
-                      - 'docker push pingpong:latest'
+                      - 'docker push rahulrakshit/pingpong:latest'
+                      - 'docker push rahulrakshit/pingpong:${GO_PIPELINE_LABEL}'
                     run_if: passed
