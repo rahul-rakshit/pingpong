@@ -14,5 +14,5 @@ FROM node:14.15.4-alpine
 COPY --from=no_dev_deps /server/dist /dist
 COPY --from=no_dev_deps /server/node_modules /node_modules
 EXPOSE 1357
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/index.js"]
 
