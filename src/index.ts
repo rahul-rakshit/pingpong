@@ -8,10 +8,9 @@ const app = express();
 app.use(cors());
 
 function findEnv(hostname: string) {
-  if (/staging/.test(hostname)) {
-    return 'staging';
-  }
-
+  if (/localhost/.test(hostname)) return 'local';
+  if (/test/.test(hostname)) return 'test';
+  if (/staging/.test(hostname)) return 'staging';
   return 'production';
 }
 
