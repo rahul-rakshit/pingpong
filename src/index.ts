@@ -7,8 +7,16 @@ const port = 1357;
 const app = express();
 app.use(cors());
 
-app.get('/ping', (_: any, res: Response) => {
-  res.json({ message: 'pong' });
+function findEnv(hostname: string) {
+  if (/staging/.test(hostname)) {
+    return 'staging';
+  }
+
+  return 'production';
+}
+
+app.get('/ping', (req: Request, res: Response) => {
+  res.json({ message: 'pong', env: findEnv(req.hostname) });
 });
 
 app.get('/add4', (req: Request, res: Response) => {
